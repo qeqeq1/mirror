@@ -1,0 +1,494 @@
+<!DOCTYPE HTML>
+<!--
+     ____ _  __ __  __ __ __ ____
+    /  _// |/ // / / // //_// __ \
+   _/ / /    // /_/ // ,<  / /_/ /
+  /___//_/|_/ \____//_/|_| \____/
+
+-->
+<html lang="zh-CN">
+  <head>
+	  <script data-ad-client="ca-pub-4244187617996292" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <meta charset="UTF-8">
+    <meta http-equiv="Cache-Control" content="no-transform">
+    <meta http-equiv="Cache-Control" content="no-siteapp">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+    <meta name="format-detection" content="telphone=no,email=no">
+    <meta name="keywords" content="厌倦了DNS污染?五分钟搭建AdGuardHome匿名&#039;s blog,技术教程,">
+    <meta name="description" itemprop="description" content="可能是全网最详细的AdguardHome搭建教程。 五分钟带你搭建一个AdGuardHome私人DNS，并配置广告过滤。(centos7) 一般情况下，你的网络运营商会给你一组DNS，这个DNS一般是最快的，但是经常会有一些烦人的事情，例如 当你输入错误的地址，总是跳转到充满广告的界面 无法访问一些网站 即使你没输入错误的地址，也有很多广……">
+    <meta property="og:title" content="厌倦了DNS污染?五分钟搭建AdGuardHome - 匿名&#039;s blog">
+    <meta property="og:site_name" content="厌倦了DNS污染?五分钟搭建AdGuardHome - 匿名&#039;s blog">
+    <meta property="og:type" content="website">
+    <meta property="og:description" content="可能是全网最详细的AdguardHome搭建教程。 五分钟带你搭建一个AdGuardHome私人DNS，并配置广告过滤。(centos7) 一般情况下，你的网络运营商会给你一组DNS，这个DNS一般是最快的，但是经常会有一些烦人的事情，例如 当你输入错误的地址，总是跳转到充满广告的界面 无法访问一些网站 即使你没输入错误的地址，也有很多广……">
+    <meta property="og:url" content="https://www.kewu.cc/2020/p=91">
+    <meta name="twitter:title" content="厌倦了DNS污染?五分钟搭建AdGuardHome - 匿名&#039;s blog">
+    <meta name="twitter:description" content="可能是全网最详细的AdguardHome搭建教程。 五分钟带你搭建一个AdGuardHome私人DNS，并配置广告过滤。(centos7) 一般情况下，你的网络运营商会给你一组DNS，这个DNS一般是最快的，但是经常会有一些烦人的事情，例如 当你输入错误的地址，总是跳转到充满广告的界面 无法访问一些网站 即使你没输入错误的地址，也有很多广……">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" type="image/x-icon" href="https://misaka91.coding.net/p/cdn/d/cdn/git/raw/master/fwtQSds7mgWFENK.jpg">
+    <title>厌倦了DNS污染?五分钟搭建AdGuardHome - 匿名&#039;s blog</title>
+    <link rel='dns-prefetch' href='//cdn.bootcss.com' />
+<link rel='dns-prefetch' href='//www.kewu.cc' />
+<link rel='stylesheet' id='wp-block-library-css'  href='https://www.kewu.cc/wp-includes/css/dist/block-library/style.min.css?ver=5.4.1' type='text/css' media='all' />
+<link rel='stylesheet' id='fontawe-css'  href='https://cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css?ver=4.7.0' type='text/css' media='all' />
+<link rel='stylesheet' id='kratos-css'  href='https://www.kewu.cc/wp-content/themes/kratos-pjax-master/static/css/kratos.min.css?ver=0.4.3' type='text/css' media='all' />
+<link rel='shortlink' href='https://www.kewu.cc/?p=91' />
+<script type='text/javascript' src='https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js?ver=2.1.4'></script>
+    <style>#offcanvas-menu{background:rgba(42,42,42,.9)}.affix{top:61px}.kratos-cover.kratos-cover_2{background-image:url(https://misaka91.coding.net/p/cdn/d/cdn/git/raw/master/DVhUGNbHJIs8onW.jpg)}@media(max-width:768px){.kratos-cover.kratos-cover_2{background-image:url(https://misaka91.coding.net/p/cdn/d/cdn/git/raw/master/DVhUGNbHJIs8onW.jpg)}}@media(max-width:768px){#kratos-header-section{display:none}nav#offcanvas-menu{top:0;padding-top:40px}.kratos-cover .desc.desc2{margin-top:-55px}}@media(min-width:768px){.pagination>li>a{background-color:rgba(255,255,255,.8)}.kratos-hentry,.navigation div,.comments-area .comment-list li,#kratos-widget-area .widget,.comment-respond{background-color:rgba(253,253,253,.85)!important}.comment-list .children li{background-color:rgba(255,253,232,.7)!important}body.custom-background{background-image:url();background-size:cover;background-attachment:fixed}}/*
+html{
+filter: grayscale(90%);
+-webkit-filter: grayscale(90%);
+-moz-filter: grayscale(90%);
+-ms-filter: grayscale(90%);
+-o-filter: grayscale(90%);
+filter:progid:DXImageTransform.Microsoft.BasicImage(grayscale=1);
+}
+*/    </style>
+  </head>
+        <body class="custom-background">
+        <div id="kratos-wrapper">
+            <div id="kratos-page">
+                <div id="kratos-header">
+                                        <div class="nav-toggle"><a class="kratos-nav-toggle js-kratos-nav-toggle"><i></i></a></div>
+                                        <header id="kratos-header-section">
+                        <div class="container">
+                            <div class="nav-header">
+                                                                <nav id="kratos-menu-wrap" class="menu-menu-1-container"><ul id="kratos-primary-menu" class="sf-menu"><li><a href="https://www.kewu.cc/">首页</a></li>
+<li><a href="https://www.kewu.cc/pay">支持我</a></li>
+<li><a href="https://www.kewu.cc/116-2">文章归档</a></li>
+<li><a href="https://www.kewu.cc/2020/p=122">友链申请</a></li>
+</ul></nav>                            </div>
+                        </div>
+                    </header>
+                </div>
+                                <div class="kratos-start kratos-hero-2">
+                    <div class="kratos-overlay"></div>
+                    <div class="kratos-cover kratos-cover_2 text-center">
+                        <div class="desc desc2 animate-box">
+                            <a href="https://www.kewu.cc"><h2>匿名's blog</h2><br><span>Opportunity knocks but once.</span></a>
+                        </div>
+                    </div>
+                </div>
+                                <div id="kratos-blog-post" >    <div id="container" class="container">
+        <div class="row">
+        <section id="main" class='col-md-8'>
+        <article>
+        <div class="kratos-hentry kratos-post-inner clearfix">
+            <header class="kratos-entry-header">
+                <h1 class="kratos-entry-title text-center">厌倦了DNS污染?五分钟搭建AdGuardHome</h1>
+                <div class="kratos-post-meta text-center">
+                    <span>
+                    <i class="fa fa-calendar"></i> 2020年4月27日                    <i class="fa fa-commenting-o"></i> 1条评论                    <i class="fa fa-eye"></i> 68次阅读  
+                    <span class="hd">
+                    <i class="fa fa-thumbs-o-up"></i> 0人点赞                    <i class="fa fa-user"></i> niming                    </span>
+                    </span>
+                </div>
+            </header>
+            <div class="kratos-post-content">
+            
+<p class="has-text-align-center has-medium-font-size"><span class="has-inline-color has-vivid-cyan-blue-color"><strong>可能</strong>是全网最详细的AdguardHome搭建教程。</span><img width="300px" src="https://camo.githubusercontent.com/c6c427a65dd6a52d092015fff9205e148130aa94/68747470733a2f2f63646e2e616467756172642e636f6d2f7075626c69632f416467756172642f436f6d6d6f6e2f616467756172645f686f6d652e737667" alt="AdGuard Home"></p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://nimingxiaoxi.coding.net/p/img/d/img/git/raw/master/adguard/68747470733a2f2f63646e2e616467756172642e636f6d2f7075626c69632f416467756172642f436f6d6d6f6e2f616467756172645f686f6d652e676966.gif" alt=""/></figure>
+
+
+
+<p>五分钟带你搭建一个AdGuardHome私人DNS，并配置广告过滤。(centos7)</p>
+
+
+
+<p>一般情况下，你的网络运营商会给你一组DNS，这个DNS一般是最快的，但是经常会有一些烦人的事情，例如</p>
+
+
+
+<ul><li>当你输入错误的地址，总是跳转到充满广告的界面</li><li>无法访问一些网站</li><li>即使你没输入错误的地址，也有很多广告</li><li>... ...</li></ul>
+
+
+<div class="alert alert-danger"></p>
+<p><span style="font-family: arial, helvetica, sans-serif;">需要注意的是，根据《互联网域名管理办法》</span>第三十六条</p>
+<div class="statute-detail-content-part-content">提供域名解析服务，应当遵守有关法律、法规、标准，具备相应的技术、服务和网络与信息安全保障能力，落实网络与信息安全保障措施，依法记录并留存域名解析日志、维护日志和变更记录，保障解析服务质量和解析系统安全。涉及经营电信业务的，应当依法取得电信业务经营许可。</div>
+<div>请您在内网服务器部署服务，本人不对带来的法律问题负责。</div>
+<p></div>
+
+
+
+<p>并且，私人dns的稳定性一般来说不如大厂DNS，对于不喜欢折腾的人来说，还是114.114.114.114、8.8.8.8更适合。</p>
+
+
+
+<p>首先，我们需要准备：</p>
+
+
+
+<ul><li>一台linux服务器</li><li>ssh工具</li><li>电脑（最好）</li></ul>
+
+
+
+<p>首先ssh链接主机</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://nimingxiaoxi.coding.net/p/img/d/img/git/raw/master/adguard/1.png" alt=""/></figure>
+
+
+
+<p>安装wget，已安装的可以忽略</p>
+
+
+<pre class="brush: plain; title: ; notranslate" title="">
+yum install wget
+</pre>
+
+
+<p>安装AdGuardHome必备的依赖，不安装会导致后续报错。</p>
+
+
+<pre class="brush: plain; title: ; notranslate" title="">
+yum install sudo nano bind9-host
+</pre>
+
+
+<figure class="wp-block-image size-large"><img src="https://nimingxiaoxi.coding.net/p/img/d/img/git/raw/master/adguard/2.png" alt=""/></figure>
+
+
+
+<p>下载AdGuardHome二进制文件。</p>
+
+
+<pre class="brush: plain; title: ; notranslate" title="">
+wget https://static.adguard.com/adguardhome/release/AdGuardHome_linux_amd64.tar.gz
+</pre>
+
+
+<p>解压AdGuardHome文件</p>
+
+
+<pre class="brush: plain; title: ; notranslate" title="">
+tar xvf AdGuardHome_linux_amd64.tar.gz
+</pre>
+
+
+<figure class="wp-block-image size-large"><img src="https://nimingxiaoxi.coding.net/p/img/d/img/git/raw/master/adguard/4.png" alt=""/></figure>
+
+
+
+<p>进入解压后的目录</p>
+
+
+<pre class="brush: plain; title: ; notranslate" title="">
+cd AdGuardHome
+pwd
+</pre>
+
+
+<figure class="wp-block-image size-large"><img src="https://nimingxiaoxi.coding.net/p/img/d/img/git/raw/master/adguard/6.png" alt=""/></figure>
+
+
+
+<p>运行<code>sudo ./AdGuardHome -s install</code>以将AdGuard Home安装为系统服务。</p>
+
+
+<pre class="brush: plain; title: ; notranslate" title="">
+sudo ./AdGuardHome -s install
+</pre>
+
+
+<figure class="wp-block-image size-large"><img src="https://nimingxiaoxi.coding.net/p/img/d/img/git/raw/master/adguard/7.png" alt=""/></figure>
+
+
+
+<p>其他可能用到的命令：</p>
+
+
+
+<ul><li><code>AdGuardHome -s uninstall</code>&nbsp;- 卸载 AdGuard Home 服务.</li><li><code>AdGuardHome -s start</code>&nbsp;- 启动AdGuard Home服务.</li><li><code>AdGuardHome -s stop</code>&nbsp;- 停止AdGuard Home服务.</li><li><code>AdGuardHome -s restart</code>&nbsp;- 重启AdGuard Home服务.</li><li><code>AdGuardHome -s status</code>&nbsp;- 显示当前服务状态.</li></ul>
+
+
+
+<h2>访问网络控制台</h2>
+
+
+
+<p>在浏览器中输入 http://1.1.1.1:3000/ 来访问AdGuard Home Web界面，&nbsp;1.1.1.1为你的服务器IP</p>
+
+
+
+<p></p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://nimingxiaoxi.coding.net/p/img/d/img/git/raw/master/adguard/8.png" alt=""/></figure>
+
+
+
+<p>此处一路下一步即可，如果无法访问，请在服务器安全组放行3000、53、80、443端口。</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://nimingxiaoxi.coding.net/p/img/d/img/git/raw/master/adguard/9.png" alt=""/></figure>
+
+
+
+<p>进入控制台，如图进入DNS封锁清单</p>
+
+
+
+<p>以下是我个人使用的封锁列表，如图所示可以添加封锁清单</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://nimingxiaoxi.coding.net/p/img/d/img/git/raw/master/adguard/10.png" alt=""/></figure>
+
+
+
+<ul><li>AdGuard Simplified Domain Names filt <a rel="noreferrer noopener" href="https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt" target="_blank" rel="nofollow" >https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt</a></li><li>AdAway <a rel="noreferrer noopener" href="https://adaway.org/hosts.txt" target="_blank" rel="nofollow" >https://adaway.org/hosts.txt</a></li><li>EasyList China <a rel="noreferrer noopener" href="https://easylist-downloads.adblockplus.org/easylistchina.txt" target="_blank" rel="nofollow" >https://easylist-downloads.adblockplus.org/easylistchina.txt</a></li><li>CJX's Annoyance List <a rel="noreferrer noopener" href="https://raw.githubusercontent.com/cjx82630/cjxlist/master/cjx-annoyance.txt" target="_blank" rel="nofollow" >https://raw.githubusercontent.com/cjx82630/cjxlist/master/cjx-annoyance.txt</a></li><li>Anti-Ad <a rel="noreferrer noopener" href="https://gitee.com/privacy-protection-tools/anti-ad/raw/master/easylist.txt" target="_blank" rel="nofollow" >https://gitee.com/privacy-protection-tools/anti-ad/raw/master/easylist.txt</a></li><li>EasyPrivacy <a href="https://easylist-downloads.adblockplus.org/easyprivacy.txt" target="_blank" rel="noreferrer noopener" rel="nofollow" >https://easylist-downloads.adblockplus.org/easyprivacy.txt</a></li></ul>
+
+
+
+<p><strong>在设置-常规设置</strong></p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://nimingxiaoxi.coding.net/p/img/d/img/git/raw/master/adguard/11.png" alt=""/></figure>
+
+
+
+<p>建议勾选浏览安全、安全搜索</p>
+
+
+
+<p><strong>在设置-DNS设置</strong></p>
+
+
+
+<p>速度限制，建议设置为0，如图</p>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://nimingxiaoxi.coding.net/p/img/d/img/git/raw/master/adguard/12.png" alt=""/></figure>
+
+
+
+<figure class="wp-block-image size-large"><img src="https://nimingxiaoxi.coding.net/p/img/d/img/git/raw/master/adguard/13.png" alt=""/></figure>
+
+
+
+<p>设置上游DNS服务器，你请求后，这台dns服务器会向上游请求。以下是我推荐的dns服务器</p>
+
+
+
+<div class="wp-block-group"><div class="wp-block-group__inner-container">
+<ul><li>tls://8.8.8.8</li><li>tls://8.8.4.4</li><li>tls://dns.google</li><li>tls://dns.adguard.com</li><li>119.29.29.29</li><li>1.2.4.8</li><li>tls://1.1.1.1</li><li>tls://1.0.0.1</li><li>https://dns10.quad9.net/dns-query</li></ul>
+</div></div>
+
+
+
+<p>设置Bootstrap DNS 服务器</p>
+
+
+
+<ul><li>1.1.1.1:53</li><li>1.0.0.1:53</li><li>9.9.9.10</li><li>149.112.112.10</li><li>114.114.114.114:53</li><li>2620:fe::10</li><li>2620:fe::fe:10</li></ul>
+
+
+
+<p>注意勾选“通过同时查询所有上流服务器以使用并行查询加速解析”</p>
+
+
+
+<p>保存即可</p>
+
+
+
+<p>AdGuard图标版权归其所有人所有</p>
+
+
+
+<p>参考资料：</p>
+
+
+
+<ul><li><a rel="noreferrer noopener" href="https://github.com/AdguardTeam/AdguardHome" target="_blank" rel="nofollow" >https://github.com/AdguardTeam/AdguardHome</a></li><li><a href="https://www.nange.cn/dns-over-https-for-adguard.html" target="_blank"  rel="nofollow" >https://www.nange.cn/dns-over-https-for-adguard.html</a></li><li><a href="https://sspai.com/post/52813" target="_blank"  rel="nofollow" >https://sspai.com/post/52813</a></li><li><a href="https://blog.wxlost.com/adguard_home.html" target="_blank"  rel="nofollow" >https://blog.wxlost.com/adguard_home.html</a></li></ul>
+
+
+
+<p></p>
+            </div>
+                        <footer class="kratos-entry-footer clearfix">
+                <div class="post-like-donate text-center clearfix" id="post-like-donate">
+                                   <a href="javascript:;" id="btn" data-action="love" data-id="91" class="Love"><i class="fa fa-thumbs-o-up"></i> 点赞</a>
+                                </div>
+                <div class="footer-tag clearfix">
+                    <div class="pull-left">
+                    <i class="fa fa-tags"></i>
+                    <a>No Tag</a>                    </div>
+                    <div class="pull-date">
+                    <span>最后编辑：2020年5月26日</span>
+                    </div>
+                </div>
+            </footer>
+        </div>
+        <nav class="navigation post-navigation clearfix" role="navigation">
+                        <div class="nav-previous clearfix">
+                <a title="《青年团的工作要照顾青年的特点》(节选）" href="https://www.kewu.cc/2020/p=83">&lt; 上一篇</a>
+            </div>
+                        <div class="nav-next">
+                <a title="《GTA5》即日起免费送、持续7天，永久有效" href="https://www.kewu.cc/2020/p=101">下一篇 &gt;</a>
+            </div>
+                    </nav>
+        <div id="comments" class="comments-area">
+    <ol class="comment-list">
+            		<li class="comment byuser comment-author-niming bypostauthor even thread-even depth-1" id="comment-17">
+				<div id="div-comment-17" class="comment-body">
+				<div class="comment-author vcard">
+			<img alt='' src='https://cn.gravatar.com/avatar/2b10d848378ffbfb5fc48020bf292378?s=50&#038;d=identicon&#038;r=g' srcset='https://cn.gravatar.com/avatar/2b10d848378ffbfb5fc48020bf292378?s=100&#038;d=identicon&#038;r=g 2x' class='avatar avatar-50 photo' height='50' width='50' />			<cite class="fn">niming</cite><span class="says">说道：</span>		</div>
+		
+		<div class="comment-meta commentmetadata"><a href="https://www.kewu.cc/2020/p=91#comment-17">
+			2020年5月17日 下午2:29				</a>
+						</div>
+
+		<div class="useragent"><img src="https://www.kewu.cc/wp-content/themes/kratos-pjax-master/static/images/ua/chrome.png" style="margin-top:-3px;width:16px;height:16px"> Google Chrome <img src="https://www.kewu.cc/wp-content/themes/kratos-pjax-master/static/images/ua/win-6.png" style="margin-left:5px;margin-top:-3px;width:16px;height:16px"> Windows 10</div><p>注意后续访问不需要带端口3000，直接IP即可</p>
+
+		<div class="reply"><a rel='nofollow' class='comment-reply-link' href='https://www.kewu.cc/2020/p=91?replytocom=17#respond' data-commentid="17" data-postid="91" data-belowelement="div-comment-17" data-respondelement="respond" aria-label='回复给niming'>回复</a></div>
+				</div>
+				</li><!-- #comment-## -->
+    </ol>
+        	<div id="respond" class="comment-respond">
+		<h4 id="reply-title" class="comment-reply-title">发表评论 <small><a rel="nofollow" id="cancel-comment-reply-link" href="/2020/p=91#respond" style="display:none;">取消回复</a></small></h4><form action="https://www.kewu.cc/wp-comments-post.php" method="post" id="commentform" class="comment-form"><p class="comment-notes">电子邮件地址不会被公开。必填项已用 * 标注</p><div class="comment form-group has-feedback"><div class="input-group"><textarea class="form-control" id="comment" placeholder="|´・ω・)ノ还不快点说点什么呀poi~" name="comment" rows="5" aria-required="true" required  onkeydown="if(event.ctrlKey){if(event.keyCode==13){document.getElementById('submit').click();return false}};"></textarea></div><div class="OwO"></div></div><div class="comment-form-author form-group has-feedback"><div class="input-group"><div class="input-group-addon"><i class="fa fa-user"></i></div><input class="form-control" placeholder="昵称" id="author" name="author" type="text" value="" size="30" /><span class="form-control-feedback required">*</span></div></div>
+<div class="comment-form-email form-group has-feedback"><div class="input-group"><div class="input-group-addon"><i class="fa fa-envelope-o"></i></div><input class="form-control" placeholder="邮箱" id="email" name="email" type="text" value="" size="30" /><span class="form-control-feedback required">*</span></div></div>
+<div class="comment-form-url form-group has-feedback"><div class="input-group"><div class="input-group-addon"><i class="fa fa-key"></i></div><input class="form-control" placeholder="人机验证：3 ＋ 7 = ?" id="code" name="code" type="text" value="" autocomplete="off" size="30" /><span class="form-control-feedback required">*</span><input type="hidden" name="co_num1" value="4" /><input type="hidden" name="co_num2" value="9" /></div></div>
+<div class="comment-form-url form-group has-feedback"><div class="input-group"><div class="input-group-addon"><i class="fa fa-link"></i></div><input class="form-control" placeholder="网站" id="url" name="url" type="text" value="" size="30" /></div></div>
+
+<p class="form-submit"><input name="submit" type="submit" id="submit" class="btn btn-primary" value="发表评论" /> <input type='hidden' name='comment_post_ID' value='91' id='comment_post_ID' />
+<input type='hidden' name='comment_parent' id='comment_parent' value='0' />
+</p></form>	</div><!-- #respond -->
+	</div>    </article>
+    </section>
+    <aside id="kratos-widget-area" class="col-md-4 hidden-xs hidden-sm scrollspy">
+        <div id="sidebar" class="affix-top">
+            <aside id="kratos_about-2" class="widget widget_kratos_about clearfix">        <div class="photo-background">
+            <div class="photo-background" style="background:url(https://www.kewu.cc/wp-content/themes/kratos-pjax-master/static/images/about.jpg) no-repeat center center;-webkit-background-size:cover;background-size:cover"></div>
+        </div>
+                <div class="photo-wrapper clearfix">
+            <div class="photo-wrapper-tip text-center">
+                <a href="https://www.kewu.cc/wp-login.php?redirect_to=https%3A%2F%2Fwww.kewu.cc%2F2020%2Fp%3D91" rel="nofollow"><img class="about-photo" src="https://www.kewu.cc/wp-content/themes/kratos-pjax-master/static/images/photo.jpg" alt=""/></a>
+            </div>
+        </div>
+        <div class="textwidget">
+            <p class="text-center"></p>
+        </div></aside>        </div>
+    </aside>
+        </div>    </div>
+</div>
+                <footer>
+                    <div id="footer" style="background:rgba(35,40,45,1)">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-6 col-md-offset-3 footer-list text-center">
+                                 
+
+<p class="kratos-social-icons"><a target="_blank" rel="nofollow" href="niming"><i class="fa fa-envelope"></i></a>                                    </p>
+
+                                    <p> © 2020 <a href="https://www.kewu.cc">匿名&#039;s blog</a>. All Rights Reserved. | 已在风雨中度过 <span id="span_dt_dt">Loading...</span><br>
+										
+									<small>	Theme <a href="https://moedog.org/787.html" target="_blank" rel="nofollow">Kratos</a> Made by <a href="https://www.vtrois.com" target="_blank" rel="nofollow">Vtrois</a> Modified by <a href="https://moedog.org" target="_blank" rel="nofollow">Moedog</a> </small>
+										
+										
+										
+								<small>	 | <a href="https://www.kewu.cc/sitemap.html" target="_blank">Sitemap</a>										<br>本站作品采用<a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="nofollow">署名-非商业性使用-相同方式共享 4.0(CC BY-NC-SA 4.0)</a>许可协议 进行许可</a><img src="https://i.loli.net/2020/04/05/wxXtEuKrqHgVBpb.png" alt="" width="88" height="31" scale="0"></small>
+							
+								<br><b>友情链接：</b><a target="_blank" href="http://www.ovoweb.cn">独白博客</a>
+								<a target="_blank" href="https://loli.by/">LYM'S BLOG</a>
+								
+
+										
+										
+                                                                        </p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cd-tool text-center">
+                                                        <div class="gotop-box"><div class="gotop-btn"><span class="fa fa-chevron-up"></span></div></div>
+                                                        <div class="search-box">
+                                <span class="fa fa-search"></span>
+                                <form class="search-form" role="search" method="get" id="searchform" action="https://www.kewu.cc/">
+                                    <input type="text" name="s" id="search" placeholder="Search..." style="display:none"/>
+                                </form>
+                            </div>
+                        </div>
+                                            </div>
+                </footer>
+            </div>
+        </div>
+        <style>.lazyload,.lazyloading{opacity:0;}.lazyloaded{opacity:1;transition:opacity 300ms;}</style><noscript><style>.lazyload{display:none;}</style></noscript><script data-noptimize="1">window.lazySizesConfig=window.lazySizesConfig||{};window.lazySizesConfig.loadMode=1;</script><script async data-noptimize="1" src='https://www.kewu.cc/wp-content/plugins/autoptimize/classes/external/js/lazysizes.min.js?ao_version=2.7.1'></script><script type='text/javascript' src='https://www.kewu.cc/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shCore.js?ver=3.0.9b'></script>
+<script type='text/javascript' src='https://www.kewu.cc/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/scripts/shBrushPlain.js?ver=3.0.9b'></script>
+<script type='text/javascript'>
+	(function(){
+		var corecss = document.createElement('link');
+		var themecss = document.createElement('link');
+		var corecssurl = "https://www.kewu.cc/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shCore.css?ver=3.0.9b";
+		if ( corecss.setAttribute ) {
+				corecss.setAttribute( "rel", "stylesheet" );
+				corecss.setAttribute( "type", "text/css" );
+				corecss.setAttribute( "href", corecssurl );
+		} else {
+				corecss.rel = "stylesheet";
+				corecss.href = corecssurl;
+		}
+		document.head.appendChild( corecss );
+		var themecssurl = "https://www.kewu.cc/wp-content/plugins/syntaxhighlighter/syntaxhighlighter3/styles/shThemeDefault.css?ver=3.0.9b";
+		if ( themecss.setAttribute ) {
+				themecss.setAttribute( "rel", "stylesheet" );
+				themecss.setAttribute( "type", "text/css" );
+				themecss.setAttribute( "href", themecssurl );
+		} else {
+				themecss.rel = "stylesheet";
+				themecss.href = themecssurl;
+		}
+		document.head.appendChild( themecss );
+	})();
+	SyntaxHighlighter.config.strings.expandSource = '+ expand source';
+	SyntaxHighlighter.config.strings.help = '?';
+	SyntaxHighlighter.config.strings.alert = 'SyntaxHighlighter\n\n';
+	SyntaxHighlighter.config.strings.noBrush = 'Can\'t find brush for: ';
+	SyntaxHighlighter.config.strings.brushNotHtmlScript = 'Brush wasn\'t configured for html-script option: ';
+	SyntaxHighlighter.defaults['pad-line-numbers'] = false;
+	SyntaxHighlighter.defaults['toolbar'] = false;
+	SyntaxHighlighter.all();
+
+	// Infinite scroll support
+	if ( typeof( jQuery ) !== 'undefined' ) {
+		jQuery( function( $ ) {
+			$( document.body ).on( 'post-load', function() {
+				SyntaxHighlighter.highlight();
+			} );
+		} );
+	}
+</script>
+<script type='text/javascript' src='https://www.kewu.cc/wp-content/themes/kratos-pjax-master/static/js/theme.min.js?ver=0.4.3'></script>
+<script type='text/javascript'>
+/* <![CDATA[ */
+var xb = {"thome":"https:\/\/www.kewu.cc\/wp-content\/themes\/kratos-pjax-master","ctime":"03\/10\/2020 15:25:00","alipay":"","wechat":"","copy":"","ajax_url":"https:\/\/www.kewu.cc\/wp-admin\/admin-ajax.php","order":"desc","owo":"https:\/\/www.kewu.cc\/wp-content\/themes\/kratos-pjax-master","site_sh":"61"};
+/* ]]> */
+</script>
+<script type='text/javascript' src='https://www.kewu.cc/wp-content/themes/kratos-pjax-master/static/js/kratos.js?ver=0.4.3'></script>
+<script type='text/javascript' src='https://www.kewu.cc/wp-content/themes/kratos-pjax-master/static/js/pjax.js?ver=0.4.3'></script>
+        <script type="text/javascript">
+                    function onBridgeReady() {
+            WeixinJSBridge.call('hideOptionMenu');
+        }
+ 
+        if (typeof WeixinJSBridge == "undefined") {
+            if (document.addEventListener) {
+                document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+            } else if (document.attachEvent) {
+                document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+                document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+            }
+        } else {
+            onBridgeReady();
+        }
+        </script>
+            </body>
+</html>
+<!-- This is the static html file created at 2020-05-26 16:37:39 by super static cache -->
